@@ -16,10 +16,30 @@ class _RegisterPageState extends State<RegisterPage> {
   final _confirmpasswordController = TextEditingController();
 
   Future signUp() async{
-    if(confirmPassword()){
+    try {
+      if (confirmPassword()) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        showDialog(
+          context: context,
+          builder: (context){
+            return AlertDialog(
+              content: Text('Successfully registered.'),
+            );
+          },
+        );
+      }
+    }on FirebaseAuthException catch(e){
+      print(e);
+      showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
       );
     }
   }
