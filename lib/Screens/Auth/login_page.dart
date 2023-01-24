@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 //email textfield
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
+                  child: TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
