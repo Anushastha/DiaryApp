@@ -33,87 +33,102 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     }on FirebaseAuthException catch(e){
       print(e);
       showDialog(
-          context: context,
-          builder: (context){
-            return AlertDialog(
-              content: Text(e.message.toString()),
-            );
-          },
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
       );
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Color(0xffF2F5F9),
       appBar: AppBar(
-        backgroundColor: Color(0xFF26A69A),
+        backgroundColor: Colors.teal.shade400,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Text(
-                'Enter your email and we will send you a password reset link.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
-            ),
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 50, horizontal: 40),
+          width: 400,
+          height: 350,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20)
           ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFE0E0E0)),
-                  borderRadius: BorderRadius.circular(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(
+                  'Enter your email and we will send you a password reset link.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff007084)),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                hintText: 'Email',
-                fillColor: Colors.white,
-                filled: true,
               ),
-            ),
-          ),
-          SizedBox(height: 20),
-
-          //reset button
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 110.0),
-            child: GestureDetector(
-              onTap: resetPassword,
-              child: Container(
-                padding: EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xff007084),
-                        Color(0xFF26A69A),
-                      ],
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: "Email",
+                    floatingLabelStyle: TextStyle(
+                      color: Colors.teal.shade800,
                     ),
-                    borderRadius: BorderRadius.circular(30)
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFE0E0E0)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.teal.shade800),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
                 ),
-                child: Center(
-                  child: Text(
-                    'Reset Password',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+              ),
+              SizedBox(height: 20),
+
+              //reset button
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 60.0 ),
+                child: GestureDetector(
+                  onTap: resetPassword,
+                  child: Container(
+                    padding: EdgeInsets.all(18),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Colors.teal.shade800,
+                            Colors.teal.shade400,
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Reset Password',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
+
     );
   }
 }

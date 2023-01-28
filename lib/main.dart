@@ -1,14 +1,18 @@
-<<<<<<< HEAD
-=======
+import 'package:diary/Screens/Auth/forgot_pass_page.dart';
+import 'package:diary/Screens/Auth/login_page.dart';
 import 'package:diary/Screens/Auth/main_page.dart';
+import 'package:diary/Screens/Auth/register_page.dart';
+import 'package:diary/Screens/Dashboard/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
->>>>>>> master
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Screens/Dashboard/home_screen.dart';
+import 'Screens/Dashboard/landing.dart';
+import 'Screens/Dashboard/signOut.dart';
 
-void main(){
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,14 +23,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
-      home: HomePage(),
-=======
       theme: ThemeData(
         textTheme: GoogleFonts.quicksandTextTheme(),
       ),
-      home: MainPage(),
->>>>>>> master
+      home: HomePage(),
+      // initialRoute: "/landing",
+      routes: {
+        "/landing" :(BuildContext context) => LandingPage(),
+        "/login" :(BuildContext context) => LoginPage(),
+        "/register" :(BuildContext context) => RegisterPage(),
+        "/forgot_pass" :(BuildContext context) => ForgotPasswordPage(),
+        "/sign_out" :(BuildContext context) => SignOut(),
+      },
     );
   }
 }

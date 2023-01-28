@@ -39,7 +39,7 @@ class _LandingPageState extends State<LandingPage> {
 
           //picture
           Lottie.asset(
-            'assets/animations/girl.json',
+            'assets/images/girl.json',
             height: 300,
             repeat: true,
           ),
