@@ -1,9 +1,9 @@
+import 'package:diary/Screens/Auth/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
-  final VoidCallback showLoginPage;
-  const RegisterPage({Key? key,required this.showLoginPage}) : super(key: key);
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -74,24 +74,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 Icon(
                   Icons.account_circle,
                   size: 50,
-                  color: Color(0xFF26A69A),
+                  color: Colors.teal.shade400,
                 ),
                 SizedBox(height: 25),
                 Text(
-                  "Register",
+                  "Create Account",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 35,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 25),
                 Text(
                   "Fill in the following to register",
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
 
                 //email textfield
                 Padding(
@@ -99,15 +99,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
+                      labelText: "Email",
+                      floatingLabelStyle: TextStyle(
+                        color: Colors.teal.shade800,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff007084)),
+                        borderSide: BorderSide(color: Colors.teal.shade800),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Email',
                       fillColor: Colors.white,
                       filled: true,
                     ),
@@ -122,15 +125,18 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: true,
                     controller: _passwordController,
                     decoration: InputDecoration(
+                      labelText: "Password",
+                      floatingLabelStyle: TextStyle(
+                        color: Colors.teal.shade800,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff007084)),
+                        borderSide: BorderSide(color: Colors.teal.shade800),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Password',
                       fillColor: Colors.white,
                       filled: true,
                     ),
@@ -145,15 +151,18 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: true,
                     controller: _confirmpasswordController,
                     decoration: InputDecoration(
+                      labelText: "Confirm Password",
+                      floatingLabelStyle: TextStyle(
+                        color: Colors.teal.shade800,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff007084)),
+                        borderSide: BorderSide(color: Colors.teal.shade800),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Confirm Password',
                       fillColor: Colors.white,
                       filled: true,
                     ),
@@ -163,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 //register button here
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                  padding: EdgeInsets.symmetric(horizontal: 110.0),
                   child: GestureDetector(
                     onTap: signUp,
                     child: Container(
@@ -171,18 +180,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: <Color>[
-                              Color(0xff007084),
-                              Color(0xFF26A69A),
+                              Colors.teal.shade800,
+                              Colors.teal.shade400,
                             ],
                           ),
                           borderRadius: BorderRadius.circular(30)
                       ),
                       child: Center(
                         child: Text(
-                          'Register',
+                          'Submit',
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                             fontSize: 18,
                           ),
                         ),
@@ -197,18 +206,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already a member?',
+                      'Already have an account?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: widget.showLoginPage,
+                    TextButton(
+                      onPressed: (){
+                        Navigator.of(context).pushNamed('/login');
+                      },
                       child: Text(
                         ' Log In',
                         style: TextStyle(
-                          color: Color(0xFF26A69A),
+                          color: Colors.teal.shade400,
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),

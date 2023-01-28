@@ -1,11 +1,11 @@
+import 'package:diary/Screens/Auth/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'forgot_pass_page.dart';
 
 class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  const LoginPage({Key? key,required this.showRegisterPage}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -17,10 +17,16 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
 
   Future signIn() async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+    try{
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-    );
+      ).then((value) {
+        Navigator.of(context).pushReplacementNamed("/sign_out");
+      });
+    }catch (e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("login failed")));
+    }
   }
 
   @override
@@ -44,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                 Icon(
                   Icons.account_circle_outlined,
                   size: 50,
-                  color: Color(0xFF26A69A),
+                  color: Colors.teal.shade400,
                 ),
               SizedBox(height: 25),
               Text(
@@ -69,15 +75,18 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
+                      labelText: "Email",
+                        floatingLabelStyle: TextStyle(
+                          color: Colors.teal.shade800,
+                        ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff007084)),
+                        borderSide: BorderSide(color: Colors.teal.shade800),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Email',
                       fillColor: Colors.white,
                       filled: true,
                     ),
@@ -88,19 +97,22 @@ class _LoginPageState extends State<LoginPage> {
                 //password textfield
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
+                  child: TextFormField(
                     obscureText: true,
                     controller: _passwordController,
                     decoration: InputDecoration(
+                      labelText: "Password",
+                      floatingLabelStyle: TextStyle(
+                        color: Colors.teal.shade800,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff007084)),
+                        borderSide: BorderSide(color: Colors.teal.shade800),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Password',
                       fillColor: Colors.white,
                       filled: true,
                     ),
@@ -126,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                             'Forgot Password?',
                           style: TextStyle(
-                            color: Color(0xFF26A69A),
+                            color: Colors.teal.shade400,
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
@@ -137,32 +149,33 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 20),
 
-                //signin button here
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                  child: GestureDetector(
-                    onTap: signIn,
-                    child: Container(
-                      padding: EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xff007084),
-                              Color(0xFF26A69A),
-                            ],
-                        ),
-                        borderRadius: BorderRadius.circular(30)
+                //log in button
+                Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Colors.teal.shade800,
+                          Colors.teal.shade400,
+                        ],
                       ),
-                      child: Center(
-                        child: Text(
-                          'Log In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  child: OutlinedButton(
+                    child: Text(
+                      'Log In',
+                      style: TextStyle(
+                        fontSize: 18,
                       ),
+                    ),
+                    onPressed: () {
+                      signIn();
+                    },
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      fixedSize: Size(180, 60),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
                     ),
                   ),
                 ),
@@ -179,12 +192,14 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 15,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: widget.showRegisterPage,
+                    TextButton(
+                      onPressed: (){
+                        Navigator.of(context).pushNamed('/register');
+                      },
                       child: Text(
-                        ' Register now',
+                        ' Register',
                         style: TextStyle(
-                          color: Color(0xFF26A69A),
+                          color: Colors.teal.shade400,
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
