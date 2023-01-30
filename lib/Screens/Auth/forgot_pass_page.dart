@@ -24,7 +24,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       showDialog(
         context: context,
         builder: (context){
-          return AlertDialog(
+          return const AlertDialog(
             //has to be valid email address for receiving the email
             content: Text('Password reset link has been sent. Check your email.'),
           );
@@ -46,13 +46,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Color(0xffF2F5F9),
+      backgroundColor: const Color(0xffF2F5F9),
       appBar: AppBar(
         backgroundColor: Colors.teal.shade400,
       ),
       body: Center(
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 50, horizontal: 40),
+          margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 40),
           width: 400,
           height: 350,
           decoration: BoxDecoration(
@@ -62,15 +62,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Text(
                   'Enter your email and we will send you a password reset link.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
@@ -81,7 +81,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       color: Colors.teal.shade800,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFFE0E0E0)),
+                      borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -93,7 +93,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               //reset button
               Padding(
@@ -101,7 +101,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 child: GestureDetector(
                   onTap: resetPassword,
                   child: Container(
-                    padding: EdgeInsets.all(18),
+                    padding: const EdgeInsets.all(18),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: <Color>[
@@ -111,7 +111,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ),
                         borderRadius: BorderRadius.circular(30)
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Reset Password',
                         style: TextStyle(

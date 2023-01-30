@@ -17,7 +17,7 @@ class _LandingPageState extends State<LandingPage> {
   void initState(){
     super.initState();
 
-    Timer(Duration(seconds:5), () =>
+    Timer(const Duration(seconds:5), () =>
         Navigator.of(context).pushNamed('/login')
     );
   }
@@ -29,11 +29,11 @@ class _LandingPageState extends State<LandingPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           Text(
             'Welcome',
             style: GoogleFonts.cookie(
-              textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
             ),
           ),
 
@@ -45,11 +45,11 @@ class _LandingPageState extends State<LandingPage> {
           ),
 
           //message
-          Text(
+          const Text(
             'A collection of notes from your life.',
             style: TextStyle(fontSize: 15),
           ),
-          SizedBox(height: 60),
+          const SizedBox(height: 60),
 
           //get started button
           // OutlinedButton(

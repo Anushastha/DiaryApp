@@ -17,12 +17,12 @@ class _SignOutState extends State<SignOut> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  user == null ? Text("No user") :  Center(
+      body:  user == null ? const Text("No user") :  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Signed in as: '+ user!.email!),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             MaterialButton(
               onPressed: (){},
               //sign out button
@@ -37,7 +37,7 @@ class _SignOutState extends State<SignOut> {
                     borderRadius: BorderRadius.circular(30)
                 ),
                 child: OutlinedButton(
-                  child: Text(
+                  child: const Text(
                     'Sign Out',
                     style: TextStyle(
                       fontSize: 18,
@@ -47,8 +47,8 @@ class _SignOutState extends State<SignOut> {
                     logout();
                   },
                   style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    fixedSize: Size(180, 60),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    fixedSize: const Size(180, 60),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),

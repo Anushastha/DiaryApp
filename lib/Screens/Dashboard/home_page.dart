@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/back_view.dart';
+import '../widgets/front_view.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -15,130 +18,57 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             //search and menu
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.search_rounded),
-                      iconSize: 35.0,
-                    ),
-                    IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.short_text_rounded),
-                      iconSize: 35.0,
-                    ),
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.search_rounded),
+                    iconSize: 35.0,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.short_text_rounded),
+                    iconSize: 35.0,
+                  ),
+                ],
               ),
-            SizedBox(height: 30.0),
+            ),
+            const SizedBox(height: 30.0),
 
             //year selector
             DropdownButton(
               value: '2023',
               items: [
-                DropdownMenuItem(
+                const DropdownMenuItem(
                   value: '2023',
                   child: Text('2023'),
                 ),
               ],
-              onChanged: (value){},
+              onChanged: (value) {},
             ),
-            SizedBox(height: 30.0),
-            
+            const SizedBox(height: 30.0),
+
             //month cards
             Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  child: PageView(
-                    controller: PageController(
-                      initialPage: 0,
-                      viewportFraction: 0.75,
-                    ),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      //card
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.teal.shade400,
-                          borderRadius: BorderRadius.circular(12.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 8.0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //month number
-                              Text(
-                                '1',
-                                textScaleFactor: 3.5,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'JAN',
-                                textScaleFactor: 2.5,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Spacer(),
-                              Row(
-                                children: [
-                                  //progress bar
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '5/31',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        SizedBox(height: 3.0),
-                                        Container(
-                                          width: double.infinity,
-                                          height: 3.0,
-                                          color: Colors.white30,
-                                          child: FractionallySizedBox(
-                                            alignment: Alignment.centerLeft,
-                                            widthFactor: 5/31,
-                                            child: Container(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  //option button
-                                  Icon(
-                                    Icons.more_vert_rounded,
-                                    color: Colors.white,
-                                    size: 30.0,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 45.0),  //card height
+                child: PageView.builder(
+                  controller: PageController(
+                    initialPage: 0,
+                    viewportFraction: 0.78,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 12,    //for 12 months
+                  itemBuilder: (_,i) => BackView(
+                    monthIndex: i + 1,
                   ),
                 ),
+              ),
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
 
             //action buttons
             Padding(
@@ -149,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     width: 155.0,
                     height: 50.0,
-                    padding: EdgeInsets.symmetric(horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(25.0),
@@ -158,22 +88,22 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         //sun icon
-                        Icon(Icons.wb_sunny_rounded),
-                        SizedBox(width: 10.0),
+                        const Icon(Icons.wb_sunny_rounded),
+                        const SizedBox(width: 10.0),
                         //details
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 'Today',
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'JAN 28/2023',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -185,30 +115,30 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   //edit button
                   Container(
                     width: 50.0,
                     height: 50.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.mode_edit_outlined,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   //calender switch button
                   Container(
                     width: 50.0,
                     height: 50.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.calendar_month_rounded,
                       color: Colors.white,
                     ),
@@ -216,10 +146,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 80.0),
+            const SizedBox(height: 75.0),
           ],
         ),
       ),
     );
   }
 }
+

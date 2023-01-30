@@ -22,10 +22,10 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       ).then((value) {
-        Navigator.of(context).pushReplacementNamed("/sign_out");
+        Navigator.of(context).pushReplacementNamed("/home_page");
       });
     }catch (e){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("login failed")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("login failed")));
     }
   }
 
@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF2F5F9),
+      backgroundColor: const Color(0xffF2F5F9),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -52,22 +52,22 @@ class _LoginPageState extends State<LoginPage> {
                   size: 50,
                   color: Colors.teal.shade400,
                 ),
-                SizedBox(height: 25),
-                Text(
+                const SizedBox(height: 25),
+                const Text(
                   "Hello",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 35,
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   "Already have an account?",
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
 
                 //email textfield
                 Padding(
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.teal.shade800,
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFE0E0E0)),
+                        borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 //password textfield
                 Padding(
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.teal.shade800,
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFE0E0E0)),
+                        borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context){
-                                return ForgotPasswordPage();
+                                return const ForgotPasswordPage();
                               },
                             ),
                           );
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 //log in button
                 Container(
@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(30)
                   ),
                   child: OutlinedButton(
-                    child: Text(
+                    child: const Text(
                       'Log In',
                       style: TextStyle(
                         fontSize: 18,
@@ -171,21 +171,21 @@ class _LoginPageState extends State<LoginPage> {
                       signIn();
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      fixedSize: Size(180, 60),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      fixedSize: const Size(180, 60),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
                 //message
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Not a member?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
