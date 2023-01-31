@@ -1,10 +1,13 @@
 import 'package:diary/Screens/Auth/forgot_pass_page.dart';
 import 'package:diary/Screens/Auth/login_page.dart';
 import 'package:diary/Screens/Auth/register_page.dart';
+import 'package:diary/Screens/Dashboard/SecondScreen.dart';
+import 'package:diary/Screens/Dashboard/entry.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'Screens/Dashboard/home.dart';
 import 'Screens/Dashboard/home_page.dart';
 import 'Screens/Dashboard/landing.dart';
 import 'Screens/Dashboard/signOut.dart';
@@ -23,10 +26,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.teal,
         textTheme: GoogleFonts.quicksandTextTheme(),
       ),
-      // home: HomePage(),
-      initialRoute: "/landing",
+      home: SecondScreen(),
+      // initialRoute: "/landing",
       routes: {
         "/landing" :(BuildContext context) => LandingPage(),
         "/login" :(BuildContext context) => LoginPage(),
@@ -34,6 +38,8 @@ class MyApp extends StatelessWidget {
         "/forgot_pass" :(BuildContext context) => ForgotPasswordPage(),
         "/sign_out" :(BuildContext context) => SignOut(),
         "/home_page" :(BuildContext context) => HomePage(),
+        "/months" :(BuildContext context) => SecondScreen(),
+        "/entry" :(BuildContext context) => Entry(),
       },
     );
   }

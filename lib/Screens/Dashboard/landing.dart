@@ -33,8 +33,7 @@ class _LandingPageState extends State<LandingPage> {
           Text(
             'Welcome',
             style: GoogleFonts.cookie(
-              textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-            ),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
           ),
 
           //picture

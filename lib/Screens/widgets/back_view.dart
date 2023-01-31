@@ -51,7 +51,24 @@ class BackView extends StatelessWidget {
                   crossAxisSpacing: 8.0,
                   mainAxisSpacing: 8.0,
                 ),
-                itemBuilder: (_, i) => Text('${i + 1}'),
+                itemBuilder: (_, i) {
+                  int day = i+1;
+                  String cDay = day < 10 ? '0$day' : '$day';
+                  String cMonth =
+                      monthIndex < 10 ? '0$monthIndex' : '$monthIndex';
+                  DateTime date = DateTime.parse('2022-$cMonth-$cDay');
+                  return Text(
+                    '$day',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: date.weekday == DateTime.sunday
+                          ? Colors.red
+                          : date.weekday == DateTime.saturday
+                              ? Colors.blue
+                              : Colors.black,
+                    ),
+                  );
+                },
               ),
             ),
             const Text(

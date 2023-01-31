@@ -10,7 +10,32 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  bool isFrontView = true;
+
+  late AnimationController controller;
+
+  switchView(){
+    setState(() {
+      isFrontView = !isFrontView;
+    });
+    if(isFrontView){
+      controller.forward();
+    }else{
+      controller.reverse();
+    }
+  }
+
+  @override
+  void initState() {
+
+    super.initState();
+    controller = AnimationController(
+        vsync: this,duration: const Duration(milliseconds: 300));
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,11 +65,11 @@ class _HomePageState extends State<HomePage> {
 
             //year selector
             DropdownButton(
-              value: '2023',
+              value: '2022',
               items: [
                 const DropdownMenuItem(
-                  value: '2023',
-                  child: Text('2023'),
+                  value: '2022',
+                  child: Text('2022'),
                 ),
               ],
               onChanged: (value) {},
@@ -62,8 +87,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   scrollDirection: Axis.horizontal,
                   itemCount: 12,    //for 12 months
-                  itemBuilder: (_,i) => BackView(
-                    monthIndex: i + 1,
+                  itemBuilder: (_,i) => AnimatedBuilder(
+                      animation: controller,
+                      builder: (_, child){
+                      return isFrontView
+                          ? FrontView(monthIndex: i + 1)
+                          : BackView(
+                              monthIndex: i + 1,
+                            );
+                    }
                   ),
                 ),
               ),
@@ -131,16 +163,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(width: 10),
                   //calender switch button
-                  Container(
-                    width: 50.0,
-                    height: 50.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.calendar_month_rounded,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () => switchView(),
+                    child: Container(
+                      width: 50.0,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        color: isFrontView ? Colors.black : Colors.teal.shade400,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        isFrontView
+                            ? Icons.calendar_month_rounded
+                            : Icons.undo_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
