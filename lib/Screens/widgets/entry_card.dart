@@ -6,7 +6,7 @@ Widget entryCard(Function()? onTap, QueryDocumentSnapshot doc){
   return InkWell(
     onTap: onTap,
     child: Container(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(15.0),
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: CardStyles.CardColor[doc['color_id']],
@@ -19,16 +19,19 @@ Widget entryCard(Function()? onTap, QueryDocumentSnapshot doc){
             doc["title"],
             style: CardStyles.mainTitle,
           ),
-          SizedBox(height: 4.0),
-          Text(
-            doc["creation_date"],
-            style: CardStyles.date,
-          ),
-          SizedBox(height: 8.0),
+          SizedBox(height: 7.0),
           Text(
             doc["content"],
             style: CardStyles.mainContent,
             overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            alignment: Alignment.bottomRight,
+            child: Text(
+              doc["creation_date"],
+              style: CardStyles.date,
+            ),
           ),
         ],
       ),

@@ -1,21 +1,22 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:diary/Screens/Dashboard/card_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class EntryEditor extends StatefulWidget {
-  const EntryEditor({Key? key}) : super(key: key);
+class AddEntry extends StatefulWidget {
+  const AddEntry({Key? key}) : super(key: key);
 
   @override
-  State<EntryEditor> createState() => _EntryEditorState();
+  State<AddEntry> createState() => _AddEntryState();
 }
 
-class _EntryEditorState extends State<EntryEditor> {
+class _AddEntryState extends State<AddEntry> {
   int color_id = Random().nextInt(CardStyles.CardColor.length);
+  String date =  formatDate(DateTime.now(),[yyyy,"/",mm,"/",dd]);
   TextEditingController _titleController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
   TextEditingController _mainController = TextEditingController();
 
   @override
@@ -50,21 +51,13 @@ class _EntryEditorState extends State<EntryEditor> {
             SizedBox(height: 2.0),
 
             //date
-            TextField(
-              controller: _dateController,
-              maxLength: 10,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.deny(RegExp(r"\s")),   //dont allow spaces
-                FilteringTextInputFormatter.allow(RegExp('[0-9/:-]')),    //allow characters
-              ],
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'YYYY/MM/DD',
-              ),
-              style: CardStyles.date,
-            ),
-            SizedBox(height: 15.0),
+            Text(date, style: CardStyles.date),
+            SizedBox(height: 5.0),
 
+            Divider(
+              height: 20.0,
+              thickness: 1.0,
+            ),
             //entry content
             TextField(
               controller: _mainController,
@@ -84,7 +77,7 @@ class _EntryEditorState extends State<EntryEditor> {
         onPressed: () async {
           FirebaseFirestore.instance.collection("entries").add({
             "title" : _titleController.text,
-            "creation_date" : _dateController.text,
+            "creation_date" : date,
             "content" : _mainController.text,
             "color_id" : color_id
           }).then((value){

@@ -1,39 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diary/Screens/Dashboard/AddEntry.dart';
 import 'package:diary/Screens/Dashboard/card_styles.dart';
-import 'package:diary/Screens/Dashboard/add_entry.dart';
-import 'package:diary/Screens/Dashboard/editEntry.dart';
-import 'package:diary/Screens/Dashboard/edit_entry.dart';
 import 'package:diary/Screens/Dashboard/entry_reader.dart';
 import 'package:diary/Screens/Dashboard/newEntry.dart';
-import 'package:diary/Screens/widgets/entry_card.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/entry_card.dart';
 
-class Entry extends StatefulWidget {
 
-  @override
-  State<Entry> createState() => _EntryState();
-}
-
-class _EntryState extends State<Entry> {
+class EntryAdd extends StatelessWidget {
+  EntryAdd({Key? key}) : super(key: key);
   final ref = FirebaseFirestore.instance.collection('entries');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CardStyles.mainColor,
       appBar: AppBar(
         title: Text(
           "Make your entries here.",
           style: TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 19
+              fontWeight: FontWeight.normal,
+              fontSize: 20
           ),
         ),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_)=>
+                  NewEntry())
+          );
+        },
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +43,7 @@ class _EntryState extends State<Entry> {
               "Your recent entries",
               style: CardStyles.mainTitle,
             ),
-            SizedBox(height: 15.0),
+            SizedBox(height: 20.0),
 
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
@@ -61,22 +62,21 @@ class _EntryState extends State<Entry> {
                             context,
                             MaterialPageRoute(
                               builder: (_) =>
-                                  Entry(),
+                                  EntryAdd(),
                             )
                         );
                       },
-                      child: ListView(
-                        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        //   crossAxisCount: 2),
+                      child: GridView(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
                         children: snapshot.data!.docs
                             .map((entry) => entryCard((){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) =>
-                                        EntryReader(entry),
-                              ),
-                              );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    EntryReader(entry),
+                              ));
                         }, entry))
                             .toList(),
                       ),
@@ -93,17 +93,6 @@ class _EntryState extends State<Entry> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      NewEntry()));
-        },
-        label: Text("Add Entry"),
-        icon: Icon(Icons.add),
       ),
     );
   }
