@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diary/Screens/Dashboard/AddEntry.dart';
 import 'package:diary/Screens/Dashboard/card_styles.dart';
-import 'package:diary/Screens/Dashboard/add_entry.dart';
-import 'package:diary/Screens/Dashboard/editEntry.dart';
-import 'package:diary/Screens/Dashboard/edit_entry.dart';
 import 'package:diary/Screens/Dashboard/entry_reader.dart';
 import 'package:diary/Screens/Dashboard/newEntry.dart';
 import 'package:diary/Screens/widgets/entry_card.dart';

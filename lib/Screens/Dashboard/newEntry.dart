@@ -82,13 +82,15 @@ class NewEntry extends StatelessWidget {
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
                 onPressed: () async{
-                  ref.add({
+                  var docref=ref.doc();
+                  docref.set({
+                    'id':docref,
                     'title': title.text,
                     'creation_date': date,
                     'content': content.text,
                     "color_id" : color_id,
                   }).then((value){
-                    print(value.id);
+                    //print(value.id);
                     Navigator.pop(context);
                   }).catchError((error)=> print("Failed to add entry due to $error"));
                 },

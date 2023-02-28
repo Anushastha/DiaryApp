@@ -12,12 +12,13 @@ String entryModelToJson(EntryModel data) => json.encode(data.toJson());
 
 class EntryModel {
   EntryModel({
+    required this.id,
     required this.colorId,
     required this.content,
     required this.creationDate,
     required this.title,
   });
-
+  String id;
   String colorId;
   String content;
   String creationDate;
@@ -25,6 +26,7 @@ class EntryModel {
 
   factory EntryModel.fromFirebaseSnapshot(
       DocumentSnapshot<Map<String, dynamic>> json) => EntryModel(
+    id:json["id"],
     colorId: json["color_id"],
     content: json["content"],
     creationDate: json["creation_date"],
@@ -32,6 +34,7 @@ class EntryModel {
   );
 
   factory EntryModel.fromJson(Map<String, dynamic> json) => EntryModel(
+    id:json["id"],
     colorId: json["color_id"],
     content: json["content"],
     creationDate: json["creation_date"],
@@ -39,6 +42,7 @@ class EntryModel {
   );
 
   Map<String, dynamic> toJson() => {
+    "id":id,
     "color_id": colorId,
     "content": content,
     "creation_date": creationDate,

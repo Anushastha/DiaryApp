@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diary/Screens/Dashboard/card_styles.dart';
-import 'package:diary/viewmodel/DiaryViewModel.dart';
+import 'package:diary/repository/entry_repository.dart';
 import 'package:flutter/material.dart';
-
 
 class EntryReader extends StatefulWidget {
   EntryReader(this.doc, {Key? key}) : super(key: key);
+
   DocumentSnapshot doc;
-  // DocumentReference ref;
 
   @override
   State<EntryReader> createState() => _EntryReaderState();
@@ -15,6 +14,15 @@ class EntryReader extends StatefulWidget {
 
 class _EntryReaderState extends State<EntryReader> {
   bool edit = false;
+
+  final ref = FirebaseFirestore.instance.collection('entries');
+
+  EntryRepository entryRepository = EntryRepository();
+
+  Future<void> delete(String id) async {
+    await ref.doc(id).delete();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,7 @@ class _EntryReaderState extends State<EntryReader> {
             ),
           ),
           TextButton(onPressed: () async{
-            // await widget.ref.delete();
+            // await ref.doc(id).delete();
             Navigator.pop(context);
           },
             child: Icon(Icons.delete_forever_rounded),

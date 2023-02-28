@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       ).then((value) {
-        Navigator.of(context).pushReplacementNamed("/home_page");
+        Navigator.of(context).pushReplacementNamed("/entry");
       });
     }catch (e){
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("login failed")));
