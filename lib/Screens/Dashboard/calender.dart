@@ -20,12 +20,27 @@ class _CalenderState extends State<Calender> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: content(),
+      appBar: AppBar(
+        title: Text(
+          "Calender",
+          style: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 19,
+          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed("/entry");
+          },
+        ),
+      ),
     );
   }
   Widget content(){
     return Column(
       children: [
-        Text('123'),
         Container(
           child: TableCalendar(
             rowHeight: 60,

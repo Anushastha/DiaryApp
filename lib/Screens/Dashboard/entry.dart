@@ -18,6 +18,7 @@ class _EntryState extends State<Entry> {
   final user = FirebaseAuth.instance.currentUser;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ref = FirebaseFirestore.instance.collection('entries');
+
   void logout(){
     FirebaseAuth.instance.signOut();
     Navigator.of(context).pushNamed("/login");
@@ -71,13 +72,13 @@ class _EntryState extends State<Entry> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: Color(0xffF2F5F9),
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('Calender'),
               onTap: () {
-                // Do something
+                Navigator.of(context).pushReplacementNamed("/calender");
               },
             ),
             ListTile(

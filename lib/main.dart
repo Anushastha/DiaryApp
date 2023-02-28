@@ -1,7 +1,6 @@
 import 'package:diary/Screens/Auth/forgot_pass_page.dart';
 import 'package:diary/Screens/Auth/login_page.dart';
 import 'package:diary/Screens/Auth/register_page.dart';
-import 'package:diary/Screens/Dashboard/SecondScreen.dart';
 import 'package:diary/Screens/Dashboard/entry.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         textTheme: GoogleFonts.quicksandTextTheme(),
       ),
-      home: Entry(),
+      home: LandingPage(),
       // home:  FirebaseAuth.instance.currentUser == null ? LoginPage() : HomePage(),
       // initialRoute: "/landing",
       routes: {
@@ -36,8 +35,8 @@ class MyApp extends StatelessWidget {
         "/register" :(BuildContext context) => RegisterPage(),
         "/forgot_pass" :(BuildContext context) => ForgotPasswordPage(),
         "/sign_out" :(BuildContext context) => SignOut(),
-        "/months" :(BuildContext context) => SecondScreen(),
         "/entry" :(BuildContext context) => Entry(),
+        "/calender" :(BuildContext context) => Calender(),
         // "/edit_entry" :(BuildContext context) => EditEntry(),
       },
     );
