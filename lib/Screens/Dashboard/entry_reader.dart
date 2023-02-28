@@ -14,6 +14,7 @@ class EntryReader extends StatefulWidget {
 
 class _EntryReaderState extends State<EntryReader> {
   bool edit = false;
+  bool changesMade = false;
 
   final ref = FirebaseFirestore.instance.collection('entries');
 
@@ -21,7 +22,35 @@ class _EntryReaderState extends State<EntryReader> {
 
   Future<void> delete(String id) async {
     await ref.doc(id).delete();
+  }
 
+  Future<void> saveChanges() async {
+    await ref.doc(widget.doc.id).update({
+      "title": _titleController.text,
+      "content": _contentController.text,
+      "last_edit_date": DateTime.now().toString(),
+    });
+    setState(() {
+      changesMade = false;
+      edit = false;
+    });
+  }
+
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _contentController = TextEditingController();
+
+  @override
+  void initState() {
+    _titleController.text = widget.doc["title"];
+    _contentController.text = widget.doc["content"];
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _contentController.dispose();
+    super.dispose();
   }
 
   @override
@@ -34,27 +63,28 @@ class _EntryReaderState extends State<EntryReader> {
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
         actions: [
-          TextButton(onPressed: (){
-            setState(() {
-              edit = !edit;
-            });
-          },
-              child: Icon(Icons.edit),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                edit = !edit;
+              });
+            },
+            child: Icon(Icons.edit),
             style: ButtonStyle(
               overlayColor: MaterialStateProperty.all(Colors.transparent),
               foregroundColor: MaterialStatePropertyAll<Color>(Colors.black),
             ),
           ),
-          TextButton(onPressed: () async{
-            // await ref.doc(id).delete();
-            Navigator.pop(context);
-          },
-            child: Icon(Icons.delete_forever_rounded),
-            style: ButtonStyle(
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
-              foregroundColor: MaterialStatePropertyAll<Color>(Colors.black),
+          if (edit)
+            TextButton(
+              onPressed: changesMade ? saveChanges : null,
+              child: Text(
+                'SAVE',
+                style: TextStyle(
+                  color: changesMade ? Colors.black : Colors.grey,
+                ),
+              ),
             ),
-          ),
         ],
       ),
       body: Padding(
@@ -67,8 +97,13 @@ class _EntryReaderState extends State<EntryReader> {
                 border: InputBorder.none,
               ),
               enabled: edit,
-              initialValue:widget.doc["title"],
+              controller: _titleController,
               style: CardStyles.mainTitle,
+              onChanged: (value) {
+                setState(() {
+                  changesMade = true;
+                });
+              },
             ),
             SizedBox(height: 15.0),
             Text(
@@ -80,15 +115,19 @@ class _EntryReaderState extends State<EntryReader> {
               thickness: 1.0,
             ),
             SizedBox(height: 12.0),
-
             TextFormField(
               decoration: InputDecoration(
                 border: InputBorder.none,
               ),
               maxLines: null,
               enabled: edit,
-              initialValue: widget.doc["content"],
+              controller: _contentController,
               style: CardStyles.mainContent,
+              onChanged: (value) {
+                setState(() {
+                  changesMade = true;
+                });
+              },
             ),
           ],
         ),
