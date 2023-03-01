@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
         "/sign_out" :(BuildContext context) => SignOut(),
         "/entry" :(BuildContext context) => Entry(),
         "/calender" :(BuildContext context) => Calender(),
-        // "/edit_entry" :(BuildContext context) => EditEntry(),
       },
     );
   }
